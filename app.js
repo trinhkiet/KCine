@@ -1,5 +1,5 @@
 (function () {
-    /* ===== CẤU HÌNH API CHUẨN KKPHIM (PHIMAPI.COM) ===== */
+    /*  CẤU HÌNH API CHUẨN  */
     var API = 'https://phimapi.com';
     var CDN_IMG = 'https://phimimg.com';
     var UPLOAD_IMG = 'https://phimapi.com/uploads/movies/';
@@ -10,7 +10,7 @@
     function ic(n) { return '<svg aria-hidden="true"><use href="#i-' + n + '"/></svg>'; }
     function plain(h) { try { return new DOMParser().parseFromString(h || '', 'text/html').body.textContent || ''; } catch (e) { return ''; } }
 
-    // Xử lý chuẩn xác mọi định dạng ảnh của KKPhim
+    // Xử lý chuẩn xác mọi định dạng ảnh
     function img(u) {
         if (!u) return '';
         u = String(u).trim();
@@ -68,7 +68,7 @@
         }).filter(function (sv) { return sv.server_data.length > 0; });
     }
 
-    /* ===== STATE QUẢN LÝ DỮ LIỆU ===== */
+    /*  STATE QUẢN LÝ DỮ LIỆU */
     var S = {
         items: [],
         by: {},
@@ -139,7 +139,7 @@
         }
     }, true);
 
-    /* ===== DANH SÁCH YÊU THÍCH (LOCALSTORAGE) ===== */
+    /*  DANH SÁCH YÊU THÍCH (LOCALSTORAGE)  */
     var mem = [];
     function getList() { try { var v = localStorage.getItem('ln-list-v2'); if (v) return JSON.parse(v); } catch (e) { } return mem; }
     function setList(l) { mem = l; try { localStorage.setItem('ln-list-v2', JSON.stringify(l)); } catch (e) { } }
@@ -162,7 +162,7 @@
         tt = setTimeout(function () { t.classList.remove('on'); }, 2200);
     }
 
-    /* ===== RENDER GIAO DIỆN ===== */
+    /*  RENDER GIAO DIỆN  */
     function card(it) {
         return '<button class="card" data-slug="' + esc(it.slug) + '" aria-label="Xem ' + esc(it.name) + '">' +
             pic(it) +
@@ -271,7 +271,7 @@
         $('#more-btn').textContent = S.loading ? 'Đang tải…' : 'Xem thêm phim';
     }
 
-    /* ===== KHỞI TẠO ROUTE CHO TỪNG LOẠI API KKPHIM ===== */
+    /*  KHỞI TẠO ROUTE CHO TỪNG LOẠI API  */
     function buildPath(page) {
         if (S.filterType === 'search') {
             return '/v1/api/tim-kiem?keyword=' + encodeURIComponent(S.searchKey) + '&page=' + page + '&limit=24';
@@ -303,7 +303,7 @@
         var reqPath = buildPath(page);
 
         return api(reqPath).then(function (res) {
-            // Bóc tách items từ mọi biến thể JSON của KKPhim
+            // Bóc tách items từ mọi biến thể JSON
             var list = res.items || (res.data && res.data.items) || [];
             var pg = res.pagination || (res.data && res.data.params && res.data.params.pagination) || {};
 
@@ -343,7 +343,7 @@
         detail(it.slug).then(function () { renderFeat(); }).catch(function () { });
     }
 
-    // Tự động kéo danh mục Thể loại và Quốc gia từ chính API của KKPhim
+    // Tự động kéo danh mục Thể loại và Quốc gia từ chính API
     function initFilters() {
         // 1. Thể loại từ /the-loai
         api('/the-loai').then(function (res) {
@@ -379,7 +379,7 @@
         }
     }
 
-    /* ===== TRÌNH PHÁT VIDEO ===== */
+    /*  TRÌNH PHÁT VIDEO  */
     var hls = null, lastFocus = null;
     function destroyPlayer() {
         if (hls) { try { hls.destroy(); } catch (e) { } hls = null; }
@@ -566,7 +566,7 @@
         if (!$('#modal').hidden && e.key === 'Escape') closeFilm();
     });
 
-    /* ===== SỰ KIỆN TÌM KIẾM VÀ DROPDOWN BỘ LỌC ===== */
+    /*  SỰ KIỆN TÌM KIẾM VÀ DROPDOWN BỘ LỌC  */
     var searchTimer = null;
     $('#q').addEventListener('input', function (e) {
         var val = e.target.value.trim();

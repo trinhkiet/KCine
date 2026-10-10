@@ -1127,3 +1127,20 @@ a {
     background: #111;
     color: #fff;
 }
+
+
+
+/* Disclaimer Footer */
+.disclaimer {
+    max-width: 800px;
+    margin: 16px auto 0;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: #71717a;
+    /* Màu xám mờ Dark Mode */
+    text-align: center;
+}
+
+.disclaimer strong {
+    color: white;
+}
